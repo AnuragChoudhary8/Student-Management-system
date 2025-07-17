@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Student</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(120deg, #f0f4f8, #d9e6f2);
+        color: #333;
+    }
+    .parallax-header {
+        background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        animation: fadeInHeader 1s ease;
+    }
+    .form-container {
+        max-width: 500px;
+        background: white;
+        margin: -50px auto 2rem;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        animation: slideUp 1s ease;
+        position: relative;
+        z-index: 1;
+    }
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #003366;
+    }
+    input[type="text"], input[type="email"] {
+        width: 100%;
+        padding: 0.7rem;
+        margin-bottom: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="email"]:focus {
+        border-color: #007acc;
+        box-shadow: 0 0 8px rgba(0,122,204,0.3);
+        outline: none;
+    }
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    .save-btn, .cancel-btn {
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .save-btn {
+        background-color: #007acc;
+        color: white;
+    }
+    .save-btn:hover {
+        background-color: #005fa3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,95,163,0.4);
+    }
+    .cancel-btn {
+        background-color: #ccc;
+        color: black;
+        text-decoration: none;
+        text-align: center;
+    }
+    .cancel-btn:hover {
+        background-color: #999;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    @keyframes fadeInHeader {
+        from { opacity: 0; transform: translateY(-30px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(40px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+</style>
+</head>
+<body>
+<div class="parallax-header">
+    Edit Student
+</div>
+
+<div class="form-container">
+    <form th:action="@{/student/edit/{id}(id=${student.id})}" th:object="${student}" method="post">
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" th:field="*{firstname}" placeholder="First Name" required>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" th:field="*{lastName}" placeholder="Last Name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" placeholder="Email" required>
+
+        <div class="btn-group">
+            <button type="submit" class="save-btn">Save</button>
+            <a href="/students" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
